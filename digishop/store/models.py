@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     title = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.title
+
 
 class Product(models.Model):
     name = models.CharField(max_length=40)
@@ -18,6 +21,9 @@ class Product(models.Model):
     discount = models.IntegerField(default=0)
     file_size = models.IntegerField()
     active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Payment(models.Model):

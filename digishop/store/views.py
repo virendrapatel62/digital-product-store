@@ -4,7 +4,7 @@ from django.shortcuts import render, HttpResponse
 
 
 def home(request):
-    return HttpResponse("Hello World..")
+    return render(request, template_name='store/index.html', context={})
 
 
 def about(request):
