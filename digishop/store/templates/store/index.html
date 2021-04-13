@@ -4,30 +4,47 @@
 <div class="container-fluid">
 
 
-    <h1>Index.html....</h1>
+    <div class="row mt-3">
+        <div id='categories' class="col-2">
 
-    <div class="row">
-        {% for product in products %}
-
-        <div class="col-3">
-            <div class="card">
-                <img src="{{product.thumbnail.url}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{product.name}}</h5>
-                    <p class="card-text">
-                        Save {{product.discount}}%
-                        <br>
-                        <span><del>Rs.{{product.price}}</del></span>
-
-                        <span>Rs. {% sale_price product.price product.discount %}</span>
-                    </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action
+                 {% get_active_class request.GET.category '' %}" href="/">All Categories</a>
+                {% for category in categories %}
+                <a class="list-group-item list-group-item-action
+                {% get_active_class request.GET.category category.id %}
+                " href="?category={{category.pk}}">{{category.title}}</a>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
+        <div id='products' class="col">
 
+            <div class="row">
+                {% for product in products %}
+
+                <div class="col-3">
+                    <div class="card">
+                        <img src="{{product.thumbnail.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.name}}</h5>
+                            <p class="card-text">
+                                Save {{product.discount}}%
+                                <br>
+                                <span><del>Rs.{{product.price}}</del></span>
+
+                                <span>Rs. {% sale_price product.price product.discount %}</span>
+                            </p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
     </div>
+
 
 </div>
 {% endblock %}
