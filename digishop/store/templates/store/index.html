@@ -1,7 +1,30 @@
 {% extends 'store/base.html' %}
 
 {% block content %}
+<div class="container-fluid">
 
-<h1>Index.html....</h1>
+    <h1>Index.html....</h1>
 
+    <div class="row">
+        {% for product in products %}
+
+        <div class="col-3">
+            <div class="card">
+                <img src="{{product.thumbnail.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">
+                        Save {{product.discount}}%
+                        <br>
+                        Rs.{{product.price}}
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
 {% endblock %}
