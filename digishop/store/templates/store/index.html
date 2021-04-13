@@ -1,7 +1,8 @@
 {% extends 'store/base.html' %}
-
+{% load store_tags %}
 {% block content %}
 <div class="container-fluid">
+
 
     <h1>Index.html....</h1>
 
@@ -16,7 +17,9 @@
                     <p class="card-text">
                         Save {{product.discount}}%
                         <br>
-                        Rs.{{product.price}}
+                        <span><del>Rs.{{product.price}}</del></span>
+
+                        <span>Rs. {% sale_price product.price product.discount %}</span>
                     </p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
