@@ -1,0 +1,8 @@
+navbar hidding button 
+checkout page 
+login required 
+payment
+orders page 
+my products
+error handler middlewares
+hosting in python anywhere 
