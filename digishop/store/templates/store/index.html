@@ -8,12 +8,20 @@
         <div id='categories' class="col-2">
 
             <div class="list-group">
+
                 <a class="list-group-item list-group-item-action
-                 {% get_active_class request.GET.category '' %}" href="/">All Categories</a>
+                    {% get_active_class request.GET.category '' %}" href="/">
+                    All Categories
+                </a>
+
                 {% for category in categories %}
+
                 <a class="list-group-item list-group-item-action
-                {% get_active_class request.GET.category category.id %}
-                " href="?category={{category.pk}}">{{category.title}}</a>
+                        {% get_active_class request.GET.category category.id %}
+                        " href="?category={{category.pk}}">
+                    {{category.title}}
+                </a>
+
                 {% endfor %}
             </div>
         </div>
@@ -34,7 +42,11 @@
 
                                 <span>Rs. {% sale_price product.price product.discount %}</span>
                             </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                        </div>
+
+                        <div class="card-footer d-grid p-0">
+                            <a href="#" class="btn border btn-light btn-block m-0">Show More</a>
                         </div>
                     </div>
                 </div>

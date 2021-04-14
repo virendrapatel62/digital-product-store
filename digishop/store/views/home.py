@@ -17,17 +17,12 @@ class HomeView(ListView):
         categories = Category.objects.all()
         if category_pk:
             products = Product.objects.filter(category=category_pk)
-
         else:
             products = Product.objects.all()
-
-        context = {
+        return {
             'categories': categories,
             'products': products,
-
         }
-
-        return context
 
 
 '''
