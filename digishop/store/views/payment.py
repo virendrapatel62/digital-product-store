@@ -1,11 +1,21 @@
 from django.shortcuts import render, redirect
 from store.models import Product
 from store.forms import CheckoutForm
+from django.views.decorators.csrf import csrf_exempt
 
 import razorpay
 
 client = razorpay.Client(
     auth=("rzp_test_Z0PZobJeZ714i2", "0lkbPdWkbepv9LIDsrlhiaLB"))
+
+
+@csrf_exempt
+def payment_verify(request):
+    if request.method == 'POST':
+        print(request.POST)
+        razorpay_payment_id = request.POST['razorpay_payment_id']
+        razorpay_order_id = request.POST['razorpay_order_id']
+        razorpay_signature = request.POST['razorpay_signature']
 
 
 def create_payment(request, slug):
