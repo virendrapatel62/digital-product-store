@@ -24,7 +24,7 @@
                         Payable Amount : Rs. {% sale_price product.price product.discount %}
                     </p>
 
-                    <form method="post">
+                    <form action="/payment/{{product.slug}}" method="post">
                         {%csrf_token%}
                         {{form.as_p}}
 
