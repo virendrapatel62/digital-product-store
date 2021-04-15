@@ -7,6 +7,27 @@
 
     {{user}}
     {{product}}
+    <br>
+    <pre>
+        {{order}}
+    </pre>
 </div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    window.onload = function () {
+        var options = {
+            "key": "rzp_test_Z0PZobJeZ714i2",
+            "name": "Feel Free To Code",
+            "description": "Description Of the Product",
+            "image": "https://example.com/your_logo",
+            "order_id": '{{order.id}}',
+            "callback_url": "http://localhost:8000/payment/verify",
+        }
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open()
+    }
+</script>
 
 {% endblock %}
