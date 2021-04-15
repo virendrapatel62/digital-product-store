@@ -1,0 +1,42 @@
+{% extends 'store/base.html' %}
+{% load store_tags %}
+{% block content %}
+<br>
+<div class="container">
+    <h1 class="">Check Out</h1>
+    <hr>
+
+    <div class="mt-3">
+        <div class="row">
+            <div class="col p-4">
+                <div class="p-4">
+                    <img class="img-fluid shadow" src="{{product.thumbnail.url}}" alt="">
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <h1 class="display-5">{{product.name}}</h1>
+                    <p>{{product.category}}</p>
+                    <p>Save {{product.discount}}%</p>
+                    <p><del>Rs. {{product.price}}</del>&nbsp; </p>
+
+                    <p style="font-size: 20px;">
+                        Payable Amount : Rs. {% sale_price product.price product.discount %}
+                    </p>
+
+                    <form method="post">
+                        {%csrf_token%}
+                        {{form.as_p}}
+
+                        <input class="btn btn-light border shandow" type="submit" value="Continue to Checkout">
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

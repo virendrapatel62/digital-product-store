@@ -13,6 +13,7 @@ class HomeView(ListView):
     context_object_name = 'products'
 
     def get_context_data(self):
+
         category_pk = self.request.GET.get("category")
         categories = Category.objects.all()
         if category_pk:

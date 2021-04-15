@@ -22,6 +22,7 @@
 
 <body>
     <!-- header start  -->
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">DigiStore</a>
@@ -31,21 +32,37 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mb-2 mb-lg-0">
 
                     <li class="nav-item">
                         <a class="nav-link" href="/" tabindex="-1" aria-disabled="true">Store</a>
                     </li>
+
+                </ul>
+
+                {% if request.user.is_authenticated %}
+                <ul class="navbar-nav mb-lg-0">
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
+                    </li>
+
+                </ul>
+
+                {%else %}
+                <ul class="navbar-nav mb-lg-0">
+
                     <li class="nav-item">
                         <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/signup" tabindex="-1" aria-disabled="true">Signup</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
-                    </li>
+
                 </ul>
+
+                {% endif %}
 
             </div>
         </div>
