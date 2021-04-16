@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
 from store.models import Product
 from store.forms import CheckoutForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='/login')
 def checkout(request, slug):
-    if request.user.is_authenticated:
-        user = request.user
-    else:
-        return redirect('login')
-
+    user = request.user
     form = CheckoutForm(initial={'email': user.email})
     product = Product.objects.get(slug=slug)
     context = {

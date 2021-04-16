@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect
 from store.models import UserProduct
+from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.utils.decorators import method_decorator
+
+# @login_required(login_url='/login')
 
 
-def OrderListView(request):
-    user = None
-    if request.user.is_authenticated:
-        user = request.user
-    else:
-        return redirect('login')
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class OrderListView(ListView):
+    template_name = 'store/orders.html'
+    context_object_name = 'orders'
 
-    orders = UserProduct.objects.filter(user=user)
-    return render(request, template_name='store/orders.html', context={'orders': orders})
+    def get_queryset(self):
+        user = self.request.user
+        return UserProduct.objects.filter(
+            user=user).order_by('-payment__date')

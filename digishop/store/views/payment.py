@@ -1,14 +1,30 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.http import FileResponse
 from store.models import Product
 from store.forms import CheckoutForm
 from django.views.decorators.csrf import csrf_exempt
 from store.models import Payment, UserProduct
 from math import floor
+from django.contrib.auth.decorators import login_required
 
 import razorpay
 
 client = razorpay.Client(
     auth=("rzp_test_Z0PZobJeZ714i2", "0lkbPdWkbepv9LIDsrlhiaLB"))
+
+
+@login_required()
+def download_file(request, slug):
+    try:
+        product = Product.objects.get(slug=slug)
+
+        userProduct = UserProduct.objects.get(
+            product=product, user=request.user)
+
+        return FileResponse(open(product.file.path, 'rb'))
+
+    except UserProduct.DoesNotExist:
+        return redirect('login')
 
 
 @csrf_exempt

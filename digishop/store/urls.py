@@ -5,7 +5,7 @@ from .views.auth import SignupView, LoginView,  logout_view
 from .views.home import HomeView, contactus, about
 from .views.details import ProductDetailView
 from .views.checkout import checkout
-from .views.payment import create_payment, payment_verify
+from .views.payment import create_payment, payment_verify, download_file
 from .views.order import OrderListView
 
 urlpatterns = [
@@ -20,6 +20,7 @@ urlpatterns = [
     path('checkout/<str:slug>', checkout, name='checkout'),
     path('payment/verify', payment_verify, name='verify_payment'),
     path('payment/<str:slug>', create_payment, name='create_payment'),
-    path('orders', OrderListView, name='orders')
+    path('orders', OrderListView.as_view(), name='orders'),
+    path('download/<str:slug>', download_file, name='downlaod')
 
 ]

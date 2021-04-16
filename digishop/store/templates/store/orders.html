@@ -3,10 +3,35 @@
 {% block content %}
 <br>
 <div class="container">
-    {% for order in orders %}
-    <h1>{{order.product.name}}</h1>
-    <br>
-    {% endfor %}
+
+    <div>
+        <div class="alert">
+            <h1>My Orders</h1>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Thumbnail</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td><img height="100px" class="border rounded " src="{{order.product.thumbnail.url}}" alt=""></td>
+                <td>{{order.product.name}}</td>
+                <td>{{order.product.category}}</td>
+                <td>{{order.payment.date}}</td>
+                <td><a class="btn btn-success btn-sm" href="/download/{{order.product.slug}}" download>Download</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 
 {% endblock %}
