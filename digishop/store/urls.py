@@ -6,6 +6,7 @@ from .views.home import HomeView, contactus, about
 from .views.details import ProductDetailView
 from .views.checkout import checkout
 from .views.payment import create_payment, payment_verify
+from .views.order import OrderListView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -19,5 +20,6 @@ urlpatterns = [
     path('checkout/<str:slug>', checkout, name='checkout'),
     path('payment/verify', payment_verify, name='verify_payment'),
     path('payment/<str:slug>', create_payment, name='create_payment'),
+    path('orders', OrderListView, name='orders')
 
 ]

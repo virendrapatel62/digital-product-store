@@ -3,6 +3,7 @@ from store.models import Product
 from store.forms import CheckoutForm
 from django.views.decorators.csrf import csrf_exempt
 from store.models import Payment, UserProduct
+from math import floor
 
 import razorpay
 
@@ -50,11 +51,13 @@ def create_payment(request, slug):
         print("create payment")
         email = form.cleaned_data.get('email')
         phone = form.cleaned_data.get('phone')
-        template_name = 'store/payment.html'
+        template_name = 'store/checkout.html'
 #       create order here
-        order_amount = 50000
+        price = floor(
+            (product.price - (product.price * product.discount * 0.01)))
+        order_amount = price * 100
         order_currency = 'INR'
-        order_receipt = 'order_rcptid_11'
+        order_receipt = f'order_rcptid_{product.id}_{user.id}'
         notes = {
             'email':  email,
             'phone': phone
@@ -75,7 +78,9 @@ def create_payment(request, slug):
         context = {
             'user': user,
             'product': product,
-            'order': order
+            'order': order,
+            'show_payment_dialog': True,
+            'form': form
         }
 
     else:
