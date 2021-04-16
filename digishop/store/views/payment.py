@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from store.models import Product
 from store.forms import CheckoutForm
 from django.views.decorators.csrf import csrf_exempt
+from store.models import Payment, UserProduct
 
 import razorpay
 
@@ -16,6 +17,23 @@ def payment_verify(request):
         razorpay_payment_id = request.POST['razorpay_payment_id']
         razorpay_order_id = request.POST['razorpay_order_id']
         razorpay_signature = request.POST['razorpay_signature']
+        params_dict = {
+            'razorpay_order_id': razorpay_order_id,
+            'razorpay_payment_id': razorpay_payment_id,
+            'razorpay_signature': razorpay_signature
+        }
+
+        client.utility.verify_payment_signature(params_dict)
+        payment = Payment.objects.get(order_id=razorpay_order_id)
+        payment.status = "SUCCESS"
+        payment.payment_id = razorpay_payment_id
+        payment.save()
+
+        user_product = UserProduct(
+            user=payment.user, payment=payment, product=payment.product)
+
+        user_product.save()
+        return render(request, template_name='store/payment_success.html')
 
 
 def create_payment(request, slug):
@@ -50,6 +68,10 @@ def create_payment(request, slug):
         }
         order = client.order.create(data=data)
 
+        # create payment
+        payment = Payment(product=product, user=user,
+                          status='FAIL', order_id=order.get('id'))
+        payment.save()
         context = {
             'user': user,
             'product': product,
