@@ -38,8 +38,14 @@ class Payment(models.Model):
     payment_id = models.CharField(max_length=40, null=True, blank=True)
     order_id = models.CharField(max_length=40, null=True, blank=True)
 
+    def __str__(self):
+        return f'user={self.user}, product={self.product}, status={self.status}'
+
 
 class UserProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'user={self.user}, product={self.product}'

@@ -3,6 +3,8 @@ from store.models import Product
 from store.forms import CheckoutForm
 from django.contrib.auth.decorators import login_required
 
+from digishop.settings import RAZOPRPAY_KEY
+
 
 @login_required(login_url='/login')
 def checkout(request, slug):
@@ -11,6 +13,7 @@ def checkout(request, slug):
     product = Product.objects.get(slug=slug)
     context = {
         'product': product,
-        'form': form
+        'form': form,
+        'RAZOPRPAY_KEY': RAZOPRPAY_KEY
     }
     return render(request, template_name='store/checkout.html', context=context)

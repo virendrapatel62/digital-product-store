@@ -6,11 +6,11 @@ from django.views.decorators.csrf import csrf_exempt
 from store.models import Payment, UserProduct
 from math import floor
 from django.contrib.auth.decorators import login_required
-
+from digishop.settings import RAZOPRPAY_KEY, RAZOPRPAY_SECRET
 import razorpay
 
 client = razorpay.Client(
-    auth=("rzp_test_Z0PZobJeZ714i2", "0lkbPdWkbepv9LIDsrlhiaLB"))
+    auth=(RAZOPRPAY_KEY, RAZOPRPAY_SECRET))
 
 
 @login_required()

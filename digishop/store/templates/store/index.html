@@ -28,7 +28,7 @@
         <div id='products' class="col">
 
             <div class="row">
-                {% for product in products %}
+                {% for product in page_obj %}
 
                 <div class="col-3">
                     <div class="card">
@@ -53,6 +53,40 @@
                 {% endfor %}
 
             </div>
+
+
+            <div class="mt-3">
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-end">
+                        <!-- prev button -->
+                        {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">First</a>
+                        </li>
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{page_obj.previous_page_number}}">&lt;&lt;</a>
+                        </li>
+                        {% endif %}
+
+                        <!-- current buitton -->
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">Page
+                                {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</a>
+                        </li>
+
+                        <!-- next Button -->
+                        {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{page_obj.next_page_number}}">&gt;&gt;</a>
+                        </li>
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{page_obj.paginator.num_pages}}">Last</a>
+                        </li>
+                        {% endif %}
+
+
+                    </ul>
+                </nav>
+            </div>
+
 
         </div>
     </div>

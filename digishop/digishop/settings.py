@@ -111,3 +111,6 @@ USE_TZ = False
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
+
+RAZOPRPAY_KEY = "rzp_test_Z0PZobJeZ714i2"
+RAZOPRPAY_SECRET = "0lkbPdWkbepv9LIDsrlhiaLB"
