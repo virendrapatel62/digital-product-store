@@ -51,7 +51,7 @@
             "description": "Description Of the Product",
             "image": "https://example.com/your_logo",
             "order_id": '{{order.id}}',
-            "callback_url": "http://localhost:8000/payment/verify",
+            "callback_url": "{{PAYMENT_CALLBACK_URL}}",
             "prefill": {
                 "name": '{{user.first_name}}',
                 "email": '{{user.email}}',

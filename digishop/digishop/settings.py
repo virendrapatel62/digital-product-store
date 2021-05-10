@@ -114,3 +114,4 @@ MEDIA_ROOT = BASE_DIR
 
 RAZOPRPAY_KEY = "rzp_test_Z0PZobJeZ714i2"
 RAZOPRPAY_SECRET = "0lkbPdWkbepv9LIDsrlhiaLB"
+PAYMENT_CALLBACK_URL = 'http://localhost:8000/payment/verify'
